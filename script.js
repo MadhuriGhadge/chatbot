@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let faqData = [];
 
     // Load FAQs from JSON
-    fetch("faq.json")
+    fetch("faq.txt")
         .then(response => response.json())
         .then(data => faqData = data.faqs)
         .catch(error => console.error("Error loading FAQ:", error));
