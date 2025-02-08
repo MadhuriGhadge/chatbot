@@ -49,6 +49,10 @@
         "answer": "The Computer Science department in K. T. H. M. College was in the year 1986."
     },
     {
+        "question": "in which year department is started?",
+        "answer": "The Computer Science department in K. T. H. M. College was in the year 1986."
+    },
+    {
         "question": "What are the courses offered by the Computer Science department?",
         "answer": "The department offers B.Sc. (Computer Science), M.Sc. (Computer Science), BCA, and PG Diploma courses."
     },
