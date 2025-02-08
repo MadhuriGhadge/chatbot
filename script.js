@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const chatbotBtn = document.getElementById("chatbot-btn");
+    const chatbotLabel = document.getElementById("chatbot-label");
     const chatPanel = document.getElementById("chat-panel");
     const closeBtn = document.getElementById("close-btn");
     const sendBtn = document.getElementById("send-btn");
@@ -7,25 +8,27 @@ document.addEventListener("DOMContentLoaded", function () {
     const chatBody = document.getElementById("chat-body");
 
     let faqData = [];
-    let firstClick = true;
 
+
+    
     // Load FAQs from JSON
-    fetch("faq.txt")
+    fetch("faq.json")
         .then(response => response.json())
         .then(data => faqData = data.faqs)
         .catch(error => console.error("Error loading FAQ:", error));
 
+    // Open chatbot and hide label
     chatbotBtn.addEventListener("click", () => {
         chatPanel.style.display = "flex";
-
-        if (firstClick) {
-            addMessage("Hi, I'm CampusMate!", "bot");
-            firstClick = false;
-        }
+        chatbotLabel.classList.add("hide-label"); // Hide label on click
     });
 
-    closeBtn.addEventListener("click", () => chatPanel.style.display = "none");
+    // Close chatbot panel
+    closeBtn.addEventListener("click", () => {
+        chatPanel.style.display = "none";
+    });
 
+    // Send message on button click or Enter key
     sendBtn.addEventListener("click", handleUserMessage);
     userInput.addEventListener("keypress", e => {
         if (e.key === "Enter") handleUserMessage();
@@ -38,7 +41,14 @@ document.addEventListener("DOMContentLoaded", function () {
         addMessage("You: " + userText, "user");
         userInput.value = "";
 
-        setTimeout(() => addMessage("Bot: " + getBotResponse(userText), "bot"), 500);
+        setTimeout(() => {
+            let botResponse = getBotResponse(userText);
+            if (botResponse.startsWith("http")) {
+                addMessage(botResponse, "bot", true); // Send image response
+            } else {
+                addMessage("Bot: " + botResponse, "bot");
+            }
+        }, 500);
     }
 
     function getBotResponse(userText) {
@@ -57,18 +67,18 @@ document.addEventListener("DOMContentLoaded", function () {
     function addMessage(text, sender, isImage = false) {
         let messageDiv = document.createElement("div");
         messageDiv.classList.add(sender);
-    
+
         if (isImage) {
             let img = document.createElement("img");
-            img.src = chatbot.jpg; 
-            img.style.maxWidth = "100%"; 
+            img.src = text;
+            img.style.maxWidth = "100%";
             img.style.borderRadius = "10px";
             messageDiv.appendChild(img);
         } else {
             messageDiv.textContent = text;
         }
-    
+
         chatBody.appendChild(messageDiv);
-        chatBody.scrollTop = chatBody.scrollHeight; // Auto-scroll to latest message
+        chatBody.scrollTop = chatBody.scrollHeight;
     }
 });
