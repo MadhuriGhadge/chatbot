@@ -9,27 +9,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let faqData = [];
 
-    // Load FAQs from JSON (If it fails, check for CORS issues)
-    fetch("faq.json")  // If not working, rename faq.json to faq.txt and change this
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Failed to load FAQ data");
-            }
-            return response.json();
-        })
-        .then(data => {
-            faqData = data.faqs;
-            console.log("FAQ Data Loaded Successfully:", faqData); // Debugging
-        })
+    // Load FAQs from JSON
+    fetch("faq.json")
+        .then(response => response.json())
+        .then(data => faqData = data.faqs)
         .catch(error => console.error("Error loading FAQ:", error));
 
-    // Open chatbot and hide label when clicked
+    // Open chatbot and hide label
     chatbotBtn.addEventListener("click", () => {
         chatPanel.style.display = "flex";
-        chatbotLabel.classList.add("hide-label"); // Hide label on click
+        chatbotLabel.classList.add("hide-label");
     });
 
-    // Close chatbot
+    // Close chatbot panel
     closeBtn.addEventListener("click", () => {
         chatPanel.style.display = "none";
     });
@@ -40,51 +32,55 @@ document.addEventListener("DOMContentLoaded", function () {
         if (e.key === "Enter") handleUserMessage();
     });
 
-    function handleUserMessage() {
+    async function handleUserMessage() {
         let userText = userInput.value.trim();
         if (!userText) return;
 
         addMessage("You: " + userText, "user");
         userInput.value = "";
 
-        setTimeout(() => {
-            let botResponse = getBotResponse(userText);
+        setTimeout(async () => {
+            let botResponse = await getBotResponse(userText);
             addMessage("Bot: " + botResponse, "bot");
         }, 500);
     }
 
-    // 🔹 Improved Fuzzy Matching for Better Responses
-    function getBotResponse(userText) {
-        userText = userText.toLowerCase().trim();
-
-        let bestMatch = null;
-        let maxMatchScore = 0;
-
-        for (let faq of faqData) {
-            let question = faq.question.toLowerCase().trim();
-
-            // Exact Match (100% Match)
-            if (userText === question) {
-                return faq.answer;
-            }
-
-            // Partial Match (Check if user input contains key words)
-            let matchScore = getMatchScore(userText, question);
-            if (matchScore > maxMatchScore) {
-                maxMatchScore = matchScore;
-                bestMatch = faq;
-            }
+    async function getBotResponse(userText) {
+        let faqAnswer = checkFAQ(userText);
+        if (faqAnswer) {
+            return faqAnswer; // Return predefined response if a match is found in FAQ
+        } else {
+            return await getChatbotResponse(userText); // 🔹 Now uses Cloudflare Worker for all API calls
         }
-
-        return maxMatchScore > 0.5 ? bestMatch.answer : "I'm sorry, I couldn't find an answer for that.";
     }
 
-    // 🔹 Function to Calculate Similarity Between Two Strings
-    function getMatchScore(input, question) {
-        let inputWords = input.split(" ");
-        let questionWords = question.split(" ");
-        let matchCount = inputWords.filter(word => questionWords.includes(word)).length;
-        return matchCount / questionWords.length;
+    function checkFAQ(userText) {
+        userText = normalizeText(userText);
+
+        for (let faq of faqData) {
+            let question = normalizeText(faq.question);
+            let pattern = new RegExp("\\b" + question.replace(/\s+/g, "\\b.*\\b") + "\\b", "i");
+            if (pattern.test(userText)) {
+                return faq.answer;
+            }
+        }
+        return null; // Return null if no match is found
+    }
+
+    // 🔹 Fetch response from Cloudflare Worker (which securely calls Gemini API)
+    async function getChatbotResponse(userText) {
+        const response = await fetch("https://raspy-hat-ee9d.ghadgemadhuri92.workers.dev/", {  
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ query: userText })
+        });
+
+        const data = await response.json();
+        return data.answer;
+    }
+
+    function normalizeText(text) {
+        return text.toLowerCase().trim().replace(/([a-z])\1+/g, "$1");
     }
 
     function addMessage(text, sender) {
