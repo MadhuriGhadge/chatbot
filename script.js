@@ -9,10 +9,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let faqData = [];
 
-    // Load FAQs from JSON
-    fetch("faq.txt")
-        .then(response => response.json())
-        .then(data => faqData = data.faqs)
+    // Load FAQs from JSON (If it fails, check for CORS issues)
+    fetch("faq.json")  // If not working, rename faq.json to faq.txt and change this
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed to load FAQ data");
+            }
+            return response.json();
+        })
+        .then(data => {
+            faqData = data.faqs;
+            console.log("FAQ Data Loaded Successfully:", faqData); // Debugging
+        })
         .catch(error => console.error("Error loading FAQ:", error));
 
     // Open chatbot and hide label when clicked
@@ -45,13 +53,38 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 500);
     }
 
+    // 🔹 Improved Fuzzy Matching for Better Responses
     function getBotResponse(userText) {
+        userText = userText.toLowerCase().trim();
+
+        let bestMatch = null;
+        let maxMatchScore = 0;
+
         for (let faq of faqData) {
-            if (userText.toLowerCase() === faq.question.toLowerCase()) {
+            let question = faq.question.toLowerCase().trim();
+
+            // Exact Match (100% Match)
+            if (userText === question) {
                 return faq.answer;
             }
+
+            // Partial Match (Check if user input contains key words)
+            let matchScore = getMatchScore(userText, question);
+            if (matchScore > maxMatchScore) {
+                maxMatchScore = matchScore;
+                bestMatch = faq;
+            }
         }
-        return "I'm sorry, I couldn't find an answer for that.";
+
+        return maxMatchScore > 0.5 ? bestMatch.answer : "I'm sorry, I couldn't find an answer for that.";
+    }
+
+    // 🔹 Function to Calculate Similarity Between Two Strings
+    function getMatchScore(input, question) {
+        let inputWords = input.split(" ");
+        let questionWords = question.split(" ");
+        let matchCount = inputWords.filter(word => questionWords.includes(word)).length;
+        return matchCount / questionWords.length;
     }
 
     function addMessage(text, sender) {
