@@ -45,7 +45,7 @@
         "answer": "You're welcome! 😊 Let me know if you need anything else."
     },
     {
-        "question": "What is the establishment year of the Computer Science department?",
+        "question": "establishment year of the Computer Science department?",
         "answer": "The Computer Science department in K. T. H. M. College was in the year 1986."
     },
     {
