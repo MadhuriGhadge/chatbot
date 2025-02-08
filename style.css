@@ -4,12 +4,12 @@ body {
     padding: 0;
 }
 
-/* Bouncing Chatbot Button */
+/* Chatbot Button (Floating Icon) */
 .chatbot-btn {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background-color: #007bff;
+    background: #007bff;
     color: white;
     font-size: 24px;
     border: none;
@@ -22,12 +22,36 @@ body {
     right: 20px;
     animation: bounce 1.5s infinite;
     transition: all 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .chatbot-btn:hover {
     background-color: #0056b3;
     transform: scale(1.1);
 }
+
+/* Chatbot Label (Static Above Button) */
+.chatbot-label {
+    position: fixed;
+    bottom: 90px; /* Adjust height above button */
+    right: 30px;
+    background: blue;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    white-space: nowrap;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+    display: block; /* Ensure it's visible */
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Hide label when chatbot is clicked */
+.hide-label {
+    opacity: 0;
+    pointer-events: none;
+}
+
 
 /* Bouncing Animation */
 @keyframes bounce {
@@ -84,12 +108,12 @@ body {
     cursor: pointer;
 }
 
-
 .chatbot-btn img {
     width: 100%;
     height: 100%;
     border-radius: 50%;
 }
+
 #send-btn {
     margin-left: 5px;
     padding: 8px;
@@ -100,25 +124,7 @@ body {
     cursor: pointer;
 }
 
-/* Welcome Message */
-.welcome-msg {
-    position: fixed;
-    bottom: 90px;
-    right: 20px;
-    background: #007bff;
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
-    font-size: 14px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 1s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-/* Chat body styles */
+/* Chat Messages (WhatsApp-Style Bubbles) */
 .chat-body {
     flex-grow: 1;
     padding: 10px;
