@@ -9,21 +9,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let faqData = [];
 
-
-    
     // Load FAQs from JSON
     fetch("faq.json")
         .then(response => response.json())
         .then(data => faqData = data.faqs)
         .catch(error => console.error("Error loading FAQ:", error));
 
-    // Open chatbot and hide label
+    // Open chatbot and hide label when clicked
     chatbotBtn.addEventListener("click", () => {
         chatPanel.style.display = "flex";
         chatbotLabel.classList.add("hide-label"); // Hide label on click
     });
 
-    // Close chatbot panel
+    // Close chatbot
     closeBtn.addEventListener("click", () => {
         chatPanel.style.display = "none";
     });
@@ -35,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function handleUserMessage() {
-        let userText = normalizeText(userInput.value.trim());
+        let userText = userInput.value.trim();
         if (!userText) return;
 
         addMessage("You: " + userText, "user");
@@ -43,41 +41,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
         setTimeout(() => {
             let botResponse = getBotResponse(userText);
-            if (botResponse.startsWith("http")) {
-                addMessage(botResponse, "bot", true); // Send image response
-            } else {
-                addMessage("Bot: " + botResponse, "bot");
-            }
+            addMessage("Bot: " + botResponse, "bot");
         }, 500);
     }
 
     function getBotResponse(userText) {
         for (let faq of faqData) {
-            let question = normalizeText(faq.question);
-            let pattern = new RegExp("\\b" + question.replace(/\s+/g, "\\b.*\\b") + "\\b", "i");
-            if (pattern.test(userText)) return faq.answer;
+            if (userText.toLowerCase() === faq.question.toLowerCase()) {
+                return faq.answer;
+            }
         }
         return "I'm sorry, I couldn't find an answer for that.";
     }
 
-    function normalizeText(text) {
-        return text.toLowerCase().trim().replace(/([a-z])\1+/g, "$1");
-    }
-
-    function addMessage(text, sender, isImage = false) {
+    function addMessage(text, sender) {
         let messageDiv = document.createElement("div");
         messageDiv.classList.add(sender);
-
-        if (isImage) {
-            let img = document.createElement("img");
-            img.src = text;
-            img.style.maxWidth = "100%";
-            img.style.borderRadius = "10px";
-            messageDiv.appendChild(img);
-        } else {
-            messageDiv.textContent = text;
-        }
-
+        messageDiv.textContent = text;
         chatBody.appendChild(messageDiv);
         chatBody.scrollTop = chatBody.scrollHeight;
     }
