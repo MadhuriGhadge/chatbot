@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Chatbot UI -->
+    <div class="chatbot-container">
+        <button id="chatbot-btn" class="chatbot-btn">
+            <img src="robot-chat-.jpg" alt="Chatbot" class="chatbot-img">
+        </button>
+        <div class="tooltip">Ask me anything!</div>
+        <div id="chat-panel" class="chat-panel">
+            <div class="chat-header">
+                <span>CampusMate</span>
+                <button id="close-btn">&times;</button>
+            </div>
+            <div id="chat-body" class="chat-body"></div>
+            <div class="chat-input">
+                <input type="text" id="user-input" placeholder="Ask something...">
+                <button id="send-btn">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

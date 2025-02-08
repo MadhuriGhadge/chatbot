@@ -1,0 +1,168 @@
+{
+    "faqs" :[
+    {
+        "question": "Hi Campusmate",
+        "answer": "hello,How can help you today?"
+    },
+    {
+        "question": "hi",
+        "answer": "Hello! How can I assist you today? 😊"
+    },
+    {
+        "question": "hello",
+        "answer": "Hi there! What would you like to know?"
+    },
+    {
+        "question": "hey",
+        "answer": "Hey! Need any help?"
+    },
+    {
+        "question": "bye",
+        "answer": "Goodbye! Have a great day! 👋"
+    },
+    {
+        "question": "Goodbye",
+        "answer": "Goodbye! Have a great day! 👋"
+    },
+    {
+        "question": "exit",
+        "answer": "Alright, closing the chat. Have a great day! 😊"
+    },
+    {
+        "question": "quit",
+        "answer": "See you later! If you need help, just ask!"
+    },
+    {
+        "question": "good morning",
+        "answer": "Good morning! How can I assist you today?"
+    },
+    {
+        "question": "good night",
+        "answer": "Good night! Have a restful sleep. 🌙"
+    },
+    {
+        "question": "thank you",
+        "answer": "You're welcome! 😊 Let me know if you need anything else."
+    },
+    {
+        "question": "What is the establishment year of the Computer Science department?",
+        "answer": "The Computer Science department in K. T. H. M. College was in the year 1986."
+    },
+    {
+        "question": "What are the courses offered by the Computer Science department?",
+        "answer": "The department offers B.Sc. (Computer Science), M.Sc. (Computer Science), BCA, and PG Diploma courses."
+    },
+    {
+        "question": "What are the key facilities available in the Computer Science department?",
+        "answer": "The department has modern computer labs, high-speed internet, smart classrooms, and a dedicated research center."
+    },
+    {
+        "question": "What types of extracurricular activities are conducted in the department?",
+        "answer": "The department organizes coding competitions, hackathons, workshops, industrial visits, and technical seminars."
+    },
+    {
+        "question": "What are the career opportunities for students in the Computer Science department?",
+        "answer": "Graduates can pursue careers in software development, data science, cybersecurity, artificial intelligence, and IT consulting."
+    },
+    {
+        "question": "How does the department support students in placements?",
+        "answer": "The department collaborates with top IT companies for campus placements, conducts mock interviews, and provides internship opportunities."
+    },
+    {
+        "question": "What is the student-to-faculty ratio in the department?",
+        "answer": "The department maintains a healthy student-to-faculty ratio to ensure personalized attention and quality education."
+    },
+    {
+        "question": "What programming languages are taught in the Computer Science department?",
+        "answer": "The curriculum covers languages like Java, Python, C, C++, JavaScript, and SQL, among others."
+    },
+    {
+        "question": "Does the department provide research opportunities for students?",
+        "answer": "Yes, students can engage in research projects, present papers at conferences, and work with faculty on innovative projects."
+    },
+    {
+        "question": "How does the department stay updated with the latest technology trends?",
+        "answer": "The department regularly updates its curriculum, collaborates with industry experts, and encourages students to participate in tech events."
+    },
+    {
+        "question": "What is the eligibility criteria for admission to the M.Sc. (Computer Science) program?",
+        "answer": "To be eligible for M.Sc. (Computer Science), a candidate must have: 1) Bachelor of Computer Science (BCS) or B.Sc. (Computer Science) with 50% marks (45% for reserved category) 2) Bachelor of Engineering (B.E.) in Computer Science, Information Technology, or Electronic Telecommunication with 50% marks."
+    },
+    {
+        "question": "When was the Computer Science Department established, and what programs does it offer?",
+        "answer": "The Computer Science Department at K.T.H.M. College, Nashik, was established in 1986. It offers various programs, including: 1) Undergraduate (UG) Courses: B.Sc. (Computer Science), B.C.A. (Science), B.Sc. (Cyber and Digital Science) 2) Postgraduate (PG) Courses: M.Sc. (Computer Science), M.Sc. (Computer Application) 3) Certificate Courses: Cisco Certified Network Associate (CCNA), Additional 10-credit courses for PG students."
+    },
+    {
+        "question": "What research and publication contributions has the department made?",
+        "answer": "The Computer Science Department has been actively involved in research and publications. Some notable contributions include: - Dr. R.A. Patil: 30 research papers (26 international + 4 conference proceedings) - K.D. More: 7 research papers - R.S. Kapse: 5 research papers (4 international + 1 national) Additionally, faculty members have participated in various research projects and academic contributions."
+    },
+    {
+        "question": "What is the student-teacher ratio in the Computer Science Department?",
+        "answer": "The student-teacher ratio varies across programs: B.Sc. (Computer Science): 21:1 B.C.A. (Science): 24:1 B.Sc. (Cyber & Digital Science): 4:1 M.Sc. (Computer Science): 9:1 M.Sc. (Computer Application): 8:1 The department maintains a balanced student-to-teacher ratio to ensure effective learning."
+    },
+    {
+        "question": "What placement opportunities are available for students?",
+        "answer": "The department has an active Training and Placement Cell, with 100% internship placements for M.Sc. (CS) and M.Sc. (CA) students in IT industries. - 30-40% of PG students get campus placements - 35-40% of students secure jobs outside campus recruitment - Companies collaborate with the department to offer projects and hiring opportunities for students."
+    },
+    {
+        "question": "What infrastructure and facilities does the Computer Science Department provide?",
+        "answer": "The department is well-equipped with modern facilities, including: - 06 Laboratories with 165 PCs and 5 Servers - 07 Classrooms with ICT Facilities + 01 Seminar Hall - 571 Books in the departmental library - 145 Internet Nodes for staff and students These facilities ensure an advanced learning environment for students."
+    },
+    {
+        "question": "How many computer labs are available in computer science department?",
+        "answer": "Total 6 computer labs are available for the computer science department."
+    },
+    {
+        "question": "Which courses are offered by computer science department at KTHM college?",
+        "answer": "The courses offered by the computer science department at KTHM college are for UG: B.Sc. (Comp. Sci.), B.C.A (Science), B.Sc (Cyber and Digital Science), and for PG: M.Sc. (Comp. Sci.), M.Sc. (Comp. Application)"
+    },
+    {
+        "question": "What is eligibility criteria for B.Sc Computer Science?",
+        "answer": "The eligibility criteria for Computer Science is: (a) Higher Secondary School Certificate (10+2) Science Stream with Mathematics or its equivalent examination OR (b) Direct Admission to Second Year for students who have completed: Three Years Diploma Course, after S.S.C. (10th standard) of Board of Technical Education conducted by Government of Maharashtra or its equivalent."
+    },
+    {
+        "question": "What is eligibility criteria for B.Sc Cyber and Digital Science?",
+        "answer": "The eligibility criteria for Computer Science is: a) Higher Secondary School Certificate (10+2) or its equivalent examination with English OR b) Three-year diploma course from the board of technical education conducted by Government of Maharashtra or its equivalent OR c) Higher secondary school certificate (10+2) Examination with English and a vocational subject of +2 level (MCVC)"
+    },
+    {
+        "question": "Which programs require a Higher Secondary School Certificate (10+2) for admission?",
+        "answer": "B.Sc. (Computer Science), B.C.A. (Science), and B.Sc. (Cyber and Digital Science) require 10+2 qualification."
+    },
+    {
+        "question": "Which subject is required for admission to B.Sc. (Computer Science)?",
+        "answer": "Students must have Mathematics as a subject in 10+2 (Science stream)."
+    },
+    {
+        "question": "What is the minimum percentage required for M.Sc. (Computer Science) admission?",
+        "answer": "The minimum requirement is 50% for general category and 45% for reserved category students."
+    },
+    {
+        "question": "What are some career opportunities after completing a course from the Computer Science department?",
+        "answer": "Career opportunities include Software Developer, Network Engineer, Data Scientist, Cybersecurity Analyst, and IT Consultant."
+    },
+    {
+        "question": "Does the Computer Science department organize any technical events or fests?",
+        "answer": "Yes, the department organizes technical events, workshops, and fests where students can showcase their skills."
+    },
+    {
+        "question": "Does the Computer Science department offer any skill development programs?",
+        "answer": "Yes, the department provides Skill Development Courses like Cisco Certification in Network Associate and Cyber Security/Information Security training."
+    },
+    {
+        "question": "Which degree is required for admission to M.Sc. (Computer Science) apart from B.Sc. (CS)?",
+        "answer": "Students with B.C.S. (Bachelor of Computer Science) or B.E. (Computer Science/IT/Electronic Telecommunication) are also eligible."
+    },
+    {
+        "question": "How does the department support students preparing for competitive programming contests?",
+        "answer": "Regular practice sessions for CodeChef, LeetCode, and ACM ICPC help students improve problem-solving skills."
+    },
+    {
+        "question": "Are students trained for government and PSU IT sector jobs?",
+        "answer": "Yes, dedicated coaching for IBPS IT Officer, SSC, and GATE in Computer Science is available."
+    },
+    {
+        "question": "Does the department conduct leadership and soft skills training?",
+        "answer": "Yes, personality development workshops and business communication training are part of the curriculum."
+    }
+]
+}
