@@ -3,16 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusMate Chatbot</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Chatbot UI -->
+
     <div class="chatbot-container">
+        <!-- Chatbot Label (Appears Above Button) -->
+        <div id="chatbot-label" class="chatbot-label">Hi! I'm CampusMate</div>
+    
+        <!-- Chatbot Button (With Image) -->
         <button id="chatbot-btn" class="chatbot-btn">
-            <img src="robot-chat-.jpg" alt="Chatbot" class="chatbot-img">
+            <img src="images/robot-chat.jpg" alt="Chatbot" class="chatbot-img">
         </button>
-        <div class="tooltip">Ask me anything!</div>
+    
+        <!-- Chat Panel -->
         <div id="chat-panel" class="chat-panel">
             <div class="chat-header">
                 <span>CampusMate</span>
@@ -25,6 +31,9 @@
             </div>
         </div>
     </div>
+     
+    
+    
 
     <script src="script.js"></script>
 </body>
