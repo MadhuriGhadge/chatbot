@@ -1,6 +1,5 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
     const chatbotBtn = document.getElementById("chatbot-btn");
-    const chatbotLabel = document.getElementById("chatbot-label");
     const chatPanel = document.getElementById("chat-panel");
     const closeBtn = document.getElementById("close-btn");
     const sendBtn = document.getElementById("send-btn");
@@ -9,28 +8,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let faqData = [];
 
-    // Load FAQs from JSON
-    fetch("faq.json")
-        .then(response => response.json())
-        .then(data => faqData = data.faqs)
-        .catch(error => console.error("Error loading FAQ:", error));
+    // 🔹 Fetch FAQs from JSONBin
+    async function fetchFAQs() {
+        try {
+            const response = await fetch("https://api.jsonbin.io/v3/b/67a78913acd3cb34a8daa82a", {
+                headers: { "X-Master-Key": "$2a$10$hhByJ9vqx6mxABcnZ.K1VOME8lVEFLibDR3PdCKflo1F1.cMukaWC" }
+            });
 
-    // Open chatbot and hide label
-    chatbotBtn.addEventListener("click", () => {
-        chatPanel.style.display = "flex";
-        chatbotLabel.classList.add("hide-label");
-    });
+            if (!response.ok) throw new Error(`HTTP Error! Status: ${response.status}`);
 
-    // Close chatbot panel
-    closeBtn.addEventListener("click", () => {
-        chatPanel.style.display = "none";
-    });
+            const data = await response.json();
+            console.log("Fetched FAQs:", data.record.faqs);
+            faqData = data.record.faqs;
+        } catch (error) {
+            console.error("Error fetching FAQs:", error);
+        }
+    }
 
-    // Send message on button click or Enter key
+    await fetchFAQs(); // Load FAQs on startup
+
+    chatbotBtn.addEventListener("click", () => chatPanel.style.display = "flex");
+    closeBtn.addEventListener("click", () => chatPanel.style.display = "none");
     sendBtn.addEventListener("click", handleUserMessage);
-    userInput.addEventListener("keypress", e => {
-        if (e.key === "Enter") handleUserMessage();
-    });
+    userInput.addEventListener("keypress", e => { if (e.key === "Enter") handleUserMessage(); });
 
     async function handleUserMessage() {
         let userText = userInput.value.trim();
@@ -39,48 +39,32 @@ document.addEventListener("DOMContentLoaded", function () {
         addMessage("You: " + userText, "user");
         userInput.value = "";
 
-        setTimeout(async () => {
-            let botResponse = await getBotResponse(userText);
+        setTimeout(() => {
+            let botResponse = checkFAQ(userText);
+            if (!botResponse) {
+                botResponse = "I'm sorry, I couldn't find an answer.";
+            }
             addMessage("Bot: " + botResponse, "bot");
         }, 500);
     }
 
-    async function getBotResponse(userText) {
-        let faqAnswer = checkFAQ(userText);
-        if (faqAnswer) {
-            return faqAnswer; // Return predefined response if a match is found in FAQ
-        } else {
-            return await getChatbotResponse(userText); // 🔹 Now uses Cloudflare Worker for all API calls
-        }
-    }
-
+    // 🔹 Use Fuzzy Matching (Fuse.js) for FAQ lookup
     function checkFAQ(userText) {
-        userText = normalizeText(userText);
+        if (!faqData.length) return null;
 
-        for (let faq of faqData) {
-            let question = normalizeText(faq.question);
-            let pattern = new RegExp("\\b" + question.replace(/\s+/g, "\\b.*\\b") + "\\b", "i");
-            if (pattern.test(userText)) {
-                return faq.answer;
-            }
+        const options = {
+            keys: ["question"],
+            threshold: 0.4,
+            includeScore: true
+        };
+
+        let fuse = new Fuse(faqData, options);
+        let result = fuse.search(userText);
+
+        if (result.length > 0) {
+            return result[0].item.answer;
         }
-        return null; // Return null if no match is found
-    }
-
-    // 🔹 Fetch response from Cloudflare Worker (which securely calls Gemini API)
-    async function getChatbotResponse(userText) {
-        const response = await fetch("https://raspy-hat-ee9d.ghadgemadhuri92.workers.dev/", {  
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ query: userText })
-        });
-
-        const data = await response.json();
-        return data.answer;
-    }
-
-    function normalizeText(text) {
-        return text.toLowerCase().trim().replace(/([a-z])\1+/g, "$1");
+        return null;
     }
 
     function addMessage(text, sender) {
