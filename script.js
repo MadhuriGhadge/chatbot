@@ -9,21 +9,19 @@ document.addEventListener("DOMContentLoaded", async function () {
     let faqData = [];
 
     // 🔹 Fetch FAQs from JSONBin
-    async function fetchFAQs() {
-        try {
-            const response = await fetch("https://api.jsonbin.io/v3/b/67a78913acd3cb34a8daa82a", {
-                headers: { "X-Master-Key": "$2a$10$hv56tqI.vRgW3ni2rXn4XeIobmY/ZUbgDnR91CUf4fg9K3TWmPXom" }
-            });
+   async function fetchFAQs() {
+    try {
+        const response = await fetch("https://api.jsonbin.io/v3/b/YOUR_BIN_ID"); // ✅ Public bin (No API key needed)
 
-            if (!response.ok) throw new Error(`HTTP Error! Status: ${response.status}`);
+        if (!response.ok) throw new Error(`HTTP Error! Status: ${response.status}`);
 
-            const data = await response.json();
-            console.log("Fetched FAQs:", data.record.faqs);
-            faqData = data.record.faqs;
-        } catch (error) {
-            console.error("Error fetching FAQs:", error);
-        }
+        const data = await response.json();
+        console.log("Fetched FAQs:", data.record.faqs);
+        faqData = data.record.faqs;
+    } catch (error) {
+        console.error("Error fetching FAQs:", error);
     }
+}
 
     await fetchFAQs(); // Load FAQs on startup
 
