@@ -9,19 +9,19 @@ document.addEventListener("DOMContentLoaded", async function () {
     let faqData = [];
 
     // 🔹 Fetch FAQs from JSONBin
-   async function fetchFAQs() {
-    try {
-        const response = await fetch("https://api.jsonbin.io/v3/b/67a84252e41b4d34e486e8c9"); // ✅ Public bin (No API key needed)
+    async function fetchFAQs() {
+        try {
+            const response = await fetch("https://api.jsonbin.io/v3/b/67a84252e41b4d34e486e8c9"); // ✅ Public bin (No API key needed)
 
-        if (!response.ok) throw new Error(`HTTP Error! Status: ${response.status}`);
+            if (!response.ok) throw new Error(`HTTP Error! Status: ${response.status}`);
 
-        const data = await response.json();
-        console.log("Fetched FAQs:", data.record.faqs);
-        faqData = data.record.faqs;
-    } catch (error) {
-        console.error("Error fetching FAQs:", error);
+            const data = await response.json();
+            console.log("Fetched FAQs:", data.record.faqs); // Debugging
+            faqData = data.record.faqs;
+        } catch (error) {
+            console.error("Error fetching FAQs:", error);
+        }
     }
-}
 
     await fetchFAQs(); // Load FAQs on startup
 
@@ -59,6 +59,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         let fuse = new Fuse(faqData, options);
         let result = fuse.search(userText);
 
+        console.log("Search result:", result); // Debugging
+
         if (result.length > 0) {
             return result[0].item.answer;
         }
@@ -71,5 +73,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         messageDiv.textContent = text;
         chatBody.appendChild(messageDiv);
         chatBody.scrollTop = chatBody.scrollHeight;
+
+        console.log("Added message:", text); // Debugging
     }
 });
