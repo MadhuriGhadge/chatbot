@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     // 🔹 Fetch FAQs from JSONBin
    async function fetchFAQs() {
     try {
-        const response = await fetch("https://api.jsonbin.io/v3/b/YOUR_BIN_ID"); // ✅ Public bin (No API key needed)
+        const response = await fetch("https://api.jsonbin.io/v3/b/67a84252e41b4d34e486e8c9"); // ✅ Public bin (No API key needed)
 
         if (!response.ok) throw new Error(`HTTP Error! Status: ${response.status}`);
 
