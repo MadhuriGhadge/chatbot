@@ -26,7 +26,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     await fetchFAQs(); // Load FAQs on startup
 
     chatbotBtn.addEventListener("click", () => chatPanel.style.display = "flex");
-    closeBtn.addEventListener("click", () => chatPanel.style.display = "none");
+   closeBtn.addEventListener("click", () => {
+    chatPanel.style.display = "none";  // Hide chat panel
+    chatBody.innerHTML = "";  // Clear previous messages
+});
+
     sendBtn.addEventListener("click", handleUserMessage);
     userInput.addEventListener("keypress", e => { if (e.key === "Enter") handleUserMessage(); });
 
