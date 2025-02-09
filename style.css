@@ -4,7 +4,7 @@ body {
     padding: 0;
 }
 
-/* Chatbot Button */
+/* Chatbot Button (Floating Icon) */
 .chatbot-btn {
     width: 60px;
     height: 60px;
@@ -25,15 +25,55 @@ body {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Chatbot Button Hover Effect */
+.chatbot-btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.1);
+}
+
+/* Chatbot Label (Static Above Button) */
 .chatbot-label {
     position: fixed;
-    bottom: 90px;
+    bottom: 90px; /* Adjust height above button */
     right: 30px;
-    background: blue;
+    background: #007bff;
     color: white;
     padding: 8px 12px;
     border-radius: 12px;
     font-size: 14px;
+    white-space: nowrap;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+    display: block; /* Ensure it's visible */
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Hide label when chatbot is clicked */
+.hide-label {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Bouncing Animation */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Tooltip */
+.tooltip {
+    position: absolute;
+    bottom: 70px;
+    right: 10px;
+    background: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    display: none;
+}
+
+.chatbot-btn:hover + .tooltip {
+    display: block;
 }
 
 /* Chat Panel */
@@ -44,12 +84,13 @@ body {
     bottom: 80px;
     right: 20px;
     background: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     display: none;
     flex-direction: column;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Chat Header */
 .chat-header {
     background: #007bff;
     color: white;
@@ -60,6 +101,7 @@ body {
     font-weight: bold;
 }
 
+/* Close Button */
 #close-btn {
     background: none;
     border: none;
@@ -68,7 +110,25 @@ body {
     cursor: pointer;
 }
 
-/* Chat Body */
+/* Chatbot Button Image */
+.chatbot-btn img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+/* Send Button */
+#send-btn {
+    margin-left: 5px;
+    padding: 8px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Chat Messages (WhatsApp-Style Bubbles) */
 .chat-body {
     flex-grow: 1;
     padding: 10px;
@@ -78,48 +138,33 @@ body {
     flex-direction: column;
 }
 
-/* User Message (Green) */
+/* User message (Right-side, Green) */
 .user {
-    background-color: #25D366;
+    background-color: #25D366; /* WhatsApp Green */
     color: white;
     align-self: flex-end;
     padding: 8px 12px;
-    border-radius: 10px;
+    border-radius: 10px 10px 0px 10px;
     margin: 5px;
     max-width: 75%;
+    word-wrap: break-word;
 }
 
-/* Bot Message (Grey) */
+/* Bot message (Left-side, Light Grey) */
 .bot {
-    background-color: #E4E6EB;
+    background-color: #E4E6EB; /* WhatsApp-style grey */
     color: black;
     align-self: flex-start;
     padding: 8px 12px;
-    border-radius: 10px;
+    border-radius: 10px 10px 10px 0px;
     margin: 5px;
     max-width: 75%;
+    word-wrap: break-word;
 }
 
-/* Chat Input */
-.chat-input {
-    display: flex;
-    padding: 10px;
-    border-top: 1px solid #ccc;
-}
-
-#user-input {
-    flex-grow: 1;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-#send-btn {
-    padding: 8px;
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-left: 5px;
+/* Image messages */
+.bot img, .user img {
+    max-width: 75%;
+    border-radius: 10px;
+    margin: 5px;
 }
