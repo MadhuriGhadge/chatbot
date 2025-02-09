@@ -5,13 +5,14 @@ body {
 }
 
 /* Chatbot Button (Floating Icon) */
+/* Chatbot Button (Floating Icon) */
 .chatbot-btn {
-    width: 60px;
-    height: 60px;
+    width: 40px; /* Adjusted size */
+    height: 40px; /* Adjusted size */
     border-radius: 50%;
     background: #007bff;
     color: white;
-    font-size: 24px;
+    font-size: 20px; /* Adjust font size for the smaller button */
     border: none;
     cursor: pointer;
     display: flex;
