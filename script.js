@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         setTimeout(() => {
             let botResponse = checkFAQ(userText);
             if (!botResponse) {
-                botResponse = "I'm sorry, I couldn't find an answer.";
+                botResponse = "I'm sorry, I couldn't find an answer.Kindly visit https://kthmcollege.ac.in/department-computer-science/profile";
             }
             addMessage("Bot: " + botResponse, "bot");
         }, 500);
